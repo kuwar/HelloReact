@@ -53,7 +53,7 @@
 	var name = "Kuwar";
 	var message = "This is surname";
 
-	ReactDOM.render(React.createElement(Greeter, { name: name, message: message }), document.getElementById('app'));
+	ReactDOM.render(React.createElement(Greeter, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -8043,6 +8043,10 @@
 	  }
 	};
 
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -8051,7 +8055,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -18774,7 +18778,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.7';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 147 */
@@ -19778,9 +19782,9 @@
 		},
 
 		render: function render() {
-
-			var name = this.state.name;
-			var message = this.state.message;
+			var _state = this.state,
+			    name = _state.name,
+			    message = _state.message;
 
 			return React.createElement(
 				'div',
@@ -19806,8 +19810,10 @@
 		displayName: 'GreeterMessage',
 
 		render: function render() {
-			var name = this.props.name;
-			var message = this.props.message;
+			var _props = this.props,
+			    name = _props.name,
+			    message = _props.message;
+
 			return React.createElement(
 				'div',
 				null,

@@ -23,10 +23,7 @@ var Greeter = React.createClass({
 	},
 
 	render: function () {
-
-		var name = this.state.name;
-		var message = this.state.message;
-
+		var {name, message} = this.state;
 		return (
 			<div>
 				<GreeterMessage name={name} message={message}/>

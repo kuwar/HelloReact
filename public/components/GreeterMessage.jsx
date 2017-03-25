@@ -2,8 +2,7 @@ var React = require('react');
 
 var GreeterMessage = React.createClass({
 	render: function () {
-		var name = this.props.name;
-		var message = this.props.message;
+		var {name, message} = this.props;
 		return (
 			<div>
 				<h1>Hello {name}!</h1>

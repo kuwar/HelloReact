@@ -6,6 +6,6 @@ var name = "Kuwar";
 var message = "This is surname";
 
 ReactDOM.render(
-	<Greeter name={name} message={message}/>,
+	<Greeter/>,
 	document.getElementById('app')
 )
